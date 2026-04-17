@@ -32,40 +32,41 @@ export default function HoldingRow({ data }: { data: Holding }) {
 
   return (
     <tr 
-      className={`border-b border-gray-100 dark:border-gray-800/50 transition-colors duration-200 
-      ${isSelected ? 'bg-blue-50 dark:bg-blue-600/5' : 'hover:bg-gray-50 dark:hover:bg-white/5'}`}
+      className={`border-b border-gray-100 dark:border-gray-800 transition-colors ${
+        isSelected ? "bg-blue-50/50 dark:bg-blue-900/10" : "hover:bg-gray-50 dark:hover:bg-white/5"
+      }`}
     >
-      <td className="p-4 text-center">
+      <td className="p-3 sm:p-5 text-center">
         <input 
           type="checkbox" 
           checked={isSelected} 
           onChange={toggle}
-          className="w-4 h-4 rounded border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-blue-500 focus:ring-blue-500 cursor-pointer"
+          className="w-4 h-4 rounded border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-blue-500 focus:ring-blue-500 transition-all cursor-pointer"
         />
       </td>
       
-      <td className="p-4">
-        <div className="flex items-center gap-3">
-          <img src={data.logo} alt={data.coin} className="w-6 h-6 rounded-full" />
+      <td className="p-3 sm:p-5">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <img src={data.logo} alt={data.coin} className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-slate-100 dark:bg-slate-800" />
           <div className="flex flex-col">
-            <span className="font-semibold text-gray-900 dark:text-white whitespace-nowrap">{data.coinName}</span>
-            <span className="text-[10px] text-gray-400 dark:text-gray-500 uppercase font-bold tracking-wider">{data.coin}</span>
+            <span className="font-semibold text-gray-900 dark:text-white text-xs sm:text-sm whitespace-nowrap">{data.coinName}</span>
+            <span className="text-[9px] sm:text-[10px] text-gray-400 dark:text-gray-500 uppercase font-bold tracking-wider">{data.coin}</span>
           </div>
         </div>
       </td>
 
-      <td className="p-4">
+      <td className="p-3 sm:p-5">
         <div className="flex flex-col text-gray-700 dark:text-white font-medium">
-          <span className="text-sm">{data.totalHolding.toLocaleString()} {data.coin}</span>
-          <span className="text-[10px] text-gray-400 dark:text-gray-500 font-normal mt-0.5 whitespace-nowrap">
+          <span className="text-xs sm:text-sm">{data.totalHolding.toLocaleString()} {data.coin}</span>
+          <span className="text-[9px] sm:text-[10px] text-gray-400 dark:text-gray-500 font-normal mt-0.5 whitespace-nowrap">
             {formatCurrency(data.averageBuyPrice)}/{data.coin}
           </span>
         </div>
       </td>
       
-      <td className="p-4">
+      <td className="p-3 sm:p-5">
         <div className="relative inline-block group">
-          <div className="text-gray-900 dark:text-white font-bold text-sm whitespace-nowrap">
+          <div className="text-gray-900 dark:text-white font-bold text-xs sm:text-sm whitespace-nowrap">
             {formatPrice(data.currentPrice)}
           </div>
           {/* Tooltip */}
@@ -79,13 +80,13 @@ export default function HoldingRow({ data }: { data: Holding }) {
         </div>
       </td>
 
-      <td className="p-4">
+      <td className="p-3 sm:p-5">
         <div className="relative inline-block group">
-          <div className="flex flex-col items-start font-medium">
-            <span className={`text-sm ${data.stcg.gain >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
+          <div className="flex flex-col items-start font-medium leading-tight">
+            <span className={`text-xs sm:text-sm ${data.stcg.gain >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
               {formatLarge(data.stcg.gain)}
             </span>
-            <span className="text-[10px] text-gray-400 dark:text-gray-500 font-normal mt-0.5">{data.stcg.balance.toLocaleString()} {data.coin}</span>
+            <span className="text-[9px] sm:text-[10px] text-gray-400 dark:text-gray-500 font-normal mt-0.5 whitespace-nowrap">{data.stcg.balance.toLocaleString()} {data.coin}</span>
           </div>
           {/* Tooltip */}
           <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 pointer-events-none">
@@ -97,13 +98,13 @@ export default function HoldingRow({ data }: { data: Holding }) {
         </div>
       </td>
       
-      <td className="p-4">
+      <td className="p-3 sm:p-5">
         <div className="relative inline-block group">
-          <div className="flex flex-col items-start font-medium">
-            <span className={`text-sm ${data.ltcg.gain >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
+          <div className="flex flex-col items-start font-medium leading-tight">
+            <span className={`text-xs sm:text-sm ${data.ltcg.gain >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
                {data.ltcg.gain === 0 ? '$0.00' : formatLarge(data.ltcg.gain)}
             </span>
-            <span className="text-[10px] text-gray-400 dark:text-gray-500 font-normal mt-0.5">{data.ltcg.balance.toLocaleString()} {data.coin}</span>
+            <span className="text-[9px] sm:text-[10px] text-gray-400 dark:text-gray-500 font-normal mt-0.5 whitespace-nowrap">{data.ltcg.balance.toLocaleString()} {data.coin}</span>
           </div>
           {/* Tooltip */}
           <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 pointer-events-none">
@@ -115,11 +116,13 @@ export default function HoldingRow({ data }: { data: Holding }) {
         </div>
       </td>
 
-      <td className="p-4 text-right text-gray-400 dark:text-gray-500 font-medium">
+      <td className="p-3 sm:p-5 text-right text-gray-400 dark:text-gray-500 font-medium text-xs sm:text-sm">
         {isSelected ? (
-          <span className="text-gray-900 dark:text-white">
-            {data.totalHolding.toLocaleString()} {data.coin}
-          </span>
+          <div className="bg-gray-100 dark:bg-white/10 px-2 py-1 rounded inline-block">
+            <span className="text-gray-900 dark:text-white font-bold">
+              {data.totalHolding.toLocaleString()} {data.coin}
+            </span>
+          </div>
         ) : (
           "-"
         )}

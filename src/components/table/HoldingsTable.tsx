@@ -59,14 +59,14 @@ export default function HoldingsTable({ holdings }: { holdings: Holding[] }) {
 
   return (
     <div className="bg-white dark:bg-[#10141E] rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm dark:shadow-lg mb-8 transition-colors">
-      <div className="p-6 border-b border-gray-100 dark:border-gray-800">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">Holdings</h2>
+      <div className="p-4 sm:p-6 border-b border-gray-100 dark:border-gray-800">
+        <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Holdings</h2>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full text-sm text-left border-collapse">
+        <table className="w-full text-sm text-left border-collapse min-w-[700px] sm:min-w-full">
           <thead className="text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-[#161D2B]">
             <tr className="border-b border-gray-200 dark:border-gray-800">
-              <th className="p-5 w-16 text-center">
+              <th className="p-3 sm:p-5 w-12 sm:w-16 text-center">
                 <input 
                   type="checkbox" 
                   checked={allSelected} 
@@ -75,29 +75,29 @@ export default function HoldingsTable({ holdings }: { holdings: Holding[] }) {
                 />
               </th>
               <th 
-                className="p-5 font-bold text-xs uppercase tracking-wider cursor-pointer hover:text-gray-900 dark:hover:text-white transition-colors group"
+                className="p-3 sm:p-5 font-bold text-[10px] sm:text-xs uppercase tracking-wider cursor-pointer hover:text-gray-900 dark:hover:text-white transition-colors group"
                 onClick={() => toggleSort("coin")}
               >
                 Asset <SortIcon active={sortKey === "coin"} order={sortOrder} />
               </th>
-              <th className="p-5 font-bold text-xs uppercase tracking-wider">
+              <th className="p-3 sm:p-5 font-bold text-[10px] sm:text-xs uppercase tracking-wider">
                 Holdings
-                <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal mt-1">Avg Buy Price</div>
+                <div className="text-[9px] sm:text-[10px] text-gray-400 dark:text-gray-500 font-normal mt-1">Avg Buy Price</div>
               </th>
-              <th className="p-5 font-bold text-xs uppercase tracking-wider">Current Price</th>
+              <th className="p-3 sm:p-5 font-bold text-[10px] sm:text-xs uppercase tracking-wider">Current Price</th>
               <th 
-                className="p-5 font-bold text-xs uppercase tracking-wider cursor-pointer hover:text-gray-900 dark:hover:text-white transition-colors group"
+                className="p-3 sm:p-5 font-bold text-[10px] sm:text-xs uppercase tracking-wider cursor-pointer hover:text-gray-900 dark:hover:text-white transition-colors group"
                 onClick={() => toggleSort("stcg")}
               >
                 Short-Term <SortIcon active={sortKey === "stcg"} order={sortOrder} />
               </th>
               <th 
-                className="p-5 font-bold text-xs uppercase tracking-wider cursor-pointer hover:text-gray-900 dark:hover:text-white transition-colors group"
+                className="p-3 sm:p-5 font-bold text-[10px] sm:text-xs uppercase tracking-wider cursor-pointer hover:text-gray-900 dark:hover:text-white transition-colors group"
                 onClick={() => toggleSort("ltcg")}
               >
                 Long-Term <SortIcon active={sortKey === "ltcg"} order={sortOrder} />
               </th>
-              <th className="p-5 font-bold text-xs uppercase tracking-wider text-right">Amount to Sell</th>
+              <th className="p-3 sm:p-5 font-bold text-[10px] sm:text-xs uppercase tracking-wider text-right">Amount to Sell</th>
             </tr>
           </thead>
 
@@ -113,7 +113,7 @@ export default function HoldingsTable({ holdings }: { holdings: Holding[] }) {
         <div className="p-4 border-t border-gray-100 dark:border-gray-800 flex justify-center bg-gray-50/50 dark:bg-[#10141E]">
           <button 
             onClick={() => setShowAll(!showAll)}
-            className="flex items-center gap-2 py-2 px-6 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-white text-xs font-bold uppercase tracking-wider transition-all"
+            className="flex items-center gap-2 py-2 px-4 sm:px-6 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all"
           >
             <span>{showAll ? 'Show Less' : `View All ${holdings.length} Assets`}</span>
             <span className={`transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`}>

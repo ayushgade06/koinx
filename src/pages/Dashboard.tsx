@@ -31,25 +31,44 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F1A] text-gray-900 dark:text-white p-8 transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F1A] text-gray-900 dark:text-white p-4 sm:p-8 transition-colors duration-300">
       <div className="max-w-[1400px] mx-auto">
         
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <h1 className="text-2xl font-bold">Tax Optimisation</h1>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 relative">
+            <h1 className="text-xl sm:text-2xl font-bold">Tax Optimisation</h1>
             <button 
               onClick={() => setShowHowItWorks(!showHowItWorks)}
-              className="text-blue-500 underline text-sm hover:text-blue-400"
+              className="text-blue-500 underline text-sm hover:text-blue-400 text-left"
             >
               How it works?
             </button>
+            
+            {/* Popup relative to trigger container */}
+            {showHowItWorks && (
+              <div className="absolute top-full left-0 mt-4 z-50 animate-in fade-in zoom-in duration-200 pointer-events-none w-[280px]">
+                <div className="bg-white text-[#111827] rounded-xl p-5 shadow-2xl relative border border-gray-100 pointer-events-auto">
+                  {/* Arrow upward tip */}
+                  <div className="absolute -top-2 left-6 w-4 h-4 bg-white rotate-45 border-t border-l border-gray-100"></div>
+                  
+                  <ul className="space-y-3 text-[11px] leading-relaxed mb-4 list-disc pl-4 marker:text-gray-400">
+                    <li>See your capital gains for FY 2024-25 in the left card</li>
+                    <li>Check boxes for assets you plan on selling to reduce your tax liability</li>
+                    <li>Instantly see your updated tax liability in the right card</li>
+                  </ul>
+                  <div className="text-[10px] border-t border-gray-100 pt-3 text-gray-500 leading-normal">
+                    <span className="font-bold text-gray-800">Pro tip:</span> Experiment with different combinations of your holdings to optimize your tax liability
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           
           <button 
             type="button"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="flex items-center gap-1 p-1 rounded-full bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 transition-all shadow-inner relative w-14 h-8"
+            className="flex items-center gap-1 p-1 rounded-full bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 transition-all shadow-inner relative w-14 h-8 shrink-0"
             title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
             <div className={`absolute top-1 left-1 w-6 h-6 rounded-full bg-white dark:bg-blue-500 shadow-md transition-all duration-300 flex items-center justify-center ${theme === 'dark' ? 'translate-x-6' : 'translate-x-0'}`}>
@@ -59,31 +78,8 @@ export default function Dashboard() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
               )}
             </div>
-            <div className="flex justify-between w-full px-2 text-gray-400">
-               <span className="text-[10px] invisible">L</span>
-               <span className="text-[10px] invisible">D</span>
-            </div>
           </button>
         </div>
-
-        {/* Popup */}
-        {showHowItWorks && (
-          <div className="absolute top-[70px] left-[220px] z-50 animate-in fade-in zoom-in duration-200 pointer-events-none">
-            <div className="bg-white text-[#111827] rounded-xl w-[280px] p-5 shadow-2xl relative border border-gray-100 pointer-events-auto">
-              {/* Arrow upward tip */}
-              {/* <div className="absolute -top-2 left-6 w-4 h-4 bg-white rotate-45 border-t border-l border-gray-100"></div> */}
-              
-              <ul className="space-y-3 text-[11px] leading-relaxed mb-4 list-disc pl-4 marker:text-gray-400">
-                <li>See your capital gains for FY 2024-25 in the left card</li>
-                <li>Check boxes for assets you plan on selling to reduce your tax liability</li>
-                <li>Instantly see your updated tax liability in the right card</li>
-              </ul>
-              <div className="text-[10px] border-t border-gray-100 pt-3 text-gray-500 leading-normal">
-                <span className="font-bold text-gray-800">Pro tip:</span> Experiment with different combinations of your holdings to optimize your tax liability
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Disclaimer Bar */}
         <div className="bg-white dark:bg-[#112244] border border-gray-200 dark:border-blue-900/50 shadow-sm rounded-lg mb-8 transition-colors">

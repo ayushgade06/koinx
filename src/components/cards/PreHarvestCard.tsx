@@ -12,19 +12,19 @@ export default function PreHarvestCard() {
   const totalNet = stNet + ltNet;
 
   const Row = ({ label, st, lt, isBold, isTotal }: { label: string; st: number; lt: number; isBold?: boolean; isTotal?: boolean }) => (
-    <div className={`grid grid-cols-[1fr_repeat(2,120px)] py-4 ${isBold ? 'font-bold text-gray-900 dark:text-white' : 'text-gray-500 dark:text-[#94A3B8]'} ${isTotal ? 'mt-4' : ''}`}>
-      <div className="text-left text-sm font-medium">{label}</div>
-      <div className="text-right text-sm">{formatCurrency(st)}</div>
-      <div className="text-right text-sm">{formatCurrency(lt)}</div>
+    <div className={`grid grid-cols-[1fr_80px_80px] sm:grid-cols-[1fr_120px_120px] py-3 sm:py-4 ${isBold ? 'font-bold text-gray-900 dark:text-white' : 'text-gray-500 dark:text-[#94A3B8]'} ${isTotal ? 'mt-4' : ''}`}>
+      <div className="text-left text-xs sm:text-sm font-medium">{label}</div>
+      <div className="text-right text-xs sm:text-sm">{formatCurrency(st)}</div>
+      <div className="text-right text-xs sm:text-sm">{formatCurrency(lt)}</div>
     </div>
   );
 
   return (
-    <div className="bg-white dark:bg-[#10141E] border border-gray-200 dark:border-gray-800 rounded-xl p-8 h-full flex flex-col justify-between shadow-sm transition-colors">
+    <div className="bg-white dark:bg-[#10141E] border border-gray-200 dark:border-gray-800 rounded-xl p-6 sm:p-8 h-full flex flex-col justify-between shadow-sm transition-colors">
       <div>
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-8">Pre Harvesting</h2>
+        <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-6 sm:mb-8">Pre Harvesting</h2>
 
-        <div className="grid grid-cols-[1fr_repeat(2,120px)] text-sm text-gray-400 dark:text-[#475569] font-medium mb-4">
+        <div className="grid grid-cols-[1fr_80px_80px] sm:grid-cols-[1fr_120px_120px] text-[10px] sm:text-sm text-gray-400 dark:text-[#475569] font-medium mb-4">
           <div></div>
           <div className="text-right">Short-term</div>
           <div className="text-right">Long-term</div>
@@ -37,9 +37,9 @@ export default function PreHarvestCard() {
         </div>
       </div>
 
-      <div className="mt-10 flex items-center gap-4">
-        <span className="text-lg font-bold text-gray-700 dark:text-white">Realised Capital Gains:</span>
-        <span className="text-2xl font-bold text-gray-900 dark:text-white">
+      <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 border-t border-gray-100 dark:border-gray-800 pt-6 sm:border-none sm:pt-0">
+        <span className="text-base sm:text-lg font-bold text-gray-700 dark:text-white leading-tight">Realised Capital Gains:</span>
+        <span className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
           {formatCurrency(totalNet)}
         </span>
       </div>
