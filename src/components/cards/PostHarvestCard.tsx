@@ -1,57 +1,48 @@
 import { useHarvest } from "../../context/HarvestContext";
-import { calculateAfterHarvest, getTotal } from "../../utils/calculations";
+import { calculateAfterHarvest, getNet } from "../../utils/calculations";
+import { formatCurrency } from "../../utils/formatters";
 
 export default function PostHarvestCard() {
   const { selected, baseGains } = useHarvest();
 
-  if (!baseGains) {
-    return (
-      <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-6 text-white opacity-50 shadow-md">
-        <h2 className="text-lg font-semibold mb-4">After Harvesting</h2>
-        <p className="text-sm">Select holdings to see potential estimates...</p>
-      </div>
-    );
-  }
+  if (!baseGains) return <div className="bg-[#1D69FF] rounded-xl h-[340px] animate-pulse"></div>;
 
   const updated = calculateAfterHarvest(baseGains, selected);
+  const stNet = getNet(updated.stcg.profits, updated.stcg.losses);
+  const ltNet = getNet(updated.ltcg.profits, updated.ltcg.losses);
+  const totalNet = stNet + ltNet;
 
-  const total = getTotal(updated);
-  const baseTotal = getTotal(baseGains);
-
-  const savingsValue = (baseTotal - total) * 0.3; // 30% tax slab example
+  const Row = ({ label, st, lt, isBold, isTotal }: { label: string; st: number; lt: number; isBold?: boolean; isTotal?: boolean }) => (
+    <div className={`grid grid-cols-[1fr_repeat(2,120px)] py-3 ${isBold ? 'font-bold text-white' : 'text-blue-100'} ${isTotal ? 'mt-6 border-t border-blue-400/30 pt-6' : ''}`}>
+      <div className="text-left text-sm">{label}</div>
+      <div className="text-right text-sm">{formatCurrency(st)}</div>
+      <div className="text-right text-sm">{formatCurrency(lt)}</div>
+    </div>
+  );
 
   return (
-    <div className="rounded-2xl p-6 text-white shadow-lg bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 relative overflow-hidden">
-      <h2 className="text-lg font-semibold mb-4">After Harvesting</h2>
+    <div className="bg-[#1D69FF] rounded-xl p-10 h-full flex flex-col justify-between text-white shadow-xl">
+      <div>
+        <h2 className="text-2xl font-bold mb-10">After Harvesting</h2>
 
-      <div className="grid grid-cols-2 gap-6 text-sm">
-        <div>
-          <p className="text-blue-100 mb-1">Short-term</p>
-          <p className="font-medium">
-            ₹{getTotal({ ...updated, ltcg: { profits: 0, losses: 0 } }).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-          </p>
+        <div className="grid grid-cols-[1fr_repeat(2,120px)] text-sm text-blue-100/70 mb-6">
+          <div></div>
+          <div className="text-right">Short-term</div>
+          <div className="text-right">Long-term</div>
         </div>
 
-        <div>
-          <p className="text-blue-100 mb-1">Long-term</p>
-          <p className="font-medium">
-            ₹{getTotal({ ...updated, stcg: { profits: 0, losses: 0 } }).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-          </p>
+        <div className="divide-y divide-blue-400/10">
+          <Row label="Profits" st={updated.stcg.profits} lt={updated.ltcg.profits} />
+          <Row label="Losses" st={updated.stcg.losses} lt={updated.ltcg.losses} />
+          <Row label="Net Capital Gains" st={stNet} lt={ltNet} isBold isTotal />
         </div>
       </div>
 
-      <div className="mt-6 border-t border-blue-400/50 pt-4">
-        <p className="text-blue-100 text-sm">Effective Capital Gains</p>
-        <p className="text-2xl font-bold mt-1">
-          ₹{total.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-        </p>
-
-        {savingsValue > 0 && (
-          <div className="mt-4 bg-white/10 rounded-xl px-4 py-3 text-sm flex items-center gap-2 backdrop-blur-sm border border-white/5">
-            <span className="text-lg">💰</span>
-            <span className="font-medium">You save ₹{savingsValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
-          </div>
-        )}
+      <div className="mt-12 flex items-center gap-6">
+        <span className="text-2xl font-bold text-white leading-tight">Effective Capital Gains:</span>
+        <span className="text-3xl font-black text-white leading-none">
+          {formatCurrency(totalNet)}
+        </span>
       </div>
     </div>
   );

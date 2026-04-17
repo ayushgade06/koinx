@@ -1,5 +1,6 @@
 import type { Holding } from "../../types";
 import { useHarvest } from "../../context/HarvestContext";
+import { formatCurrency } from "../../utils/formatters";
 
 export default function HoldingRow({ data }: { data: Holding }) {
   const { selected, setSelected } = useHarvest();
@@ -14,42 +15,77 @@ export default function HoldingRow({ data }: { data: Holding }) {
     }
   };
 
+  const formatPrice = (p: number) => {
+    if (p >= 1000) return `$${(p / 1000).toFixed(2)}K`;
+    return formatCurrency(p);
+  };
+
+  const formatLarge = (v: number) => {
+    if (Math.abs(v) >= 1000000) return `${v >= 0 ? '+' : '-'}$${(Math.abs(v) / 1000000).toFixed(2)}M`;
+    return `${v >= 0 ? '+' : '-'}${formatCurrency(Math.abs(v))}`;
+  };
+
   return (
     <tr 
-      className={`border-b border-gray-800 transition-colors duration-200 
-      ${isSelected ? 'bg-blue-600/10' : 'hover:bg-[#1A2233]'}`}
+      className={`border-b border-gray-800/50 transition-colors duration-200 
+      ${isSelected ? 'bg-blue-600/5' : 'hover:bg-white/5'}`}
     >
-      <td className="p-4">
+      <td className="p-4 text-center">
         <input 
           type="checkbox" 
           checked={isSelected} 
           onChange={toggle}
-          className="w-4 h-4 rounded border-gray-600 bg-gray-800 text-blue-500 focus:ring-blue-500"
+          className="w-4 h-4 rounded border-gray-700 bg-gray-900 text-blue-500 focus:ring-blue-500"
         />
       </td>
       
-      <td className="p-4 flex items-center gap-3">
-        <img src={data.logo} alt={data.coinName} className="w-8 h-8 rounded-full bg-gray-800" />
-        <div>
-          <p className="font-semibold text-white">{data.coin}</p>
-          <p className="text-xs text-gray-400">{data.coinName}</p>
+      <td className="p-4">
+        <div className="flex items-center gap-3">
+          <img src={data.logo} alt={data.coin} className="w-6 h-6 rounded-full" />
+          <div className="flex flex-col">
+            <span className="font-semibold text-white whitespace-nowrap">{data.coinName}</span>
+            <span className="text-[10px] text-gray-500 uppercase font-bold tracking-wider">{data.coin}</span>
+          </div>
         </div>
       </td>
 
-      <td className="p-4 text-white font-medium">
-        {data.totalHolding.toFixed(4)} {data.coin}
+      <td className="p-4">
+        <div className="flex flex-col text-white font-medium">
+          <span className="text-sm">{data.totalHolding.toLocaleString()} {data.coin}</span>
+          <span className="text-[10px] text-gray-500 font-normal mt-0.5">{formatCurrency(data.averageBuyPrice)}/{data.coin}</span>
+        </div>
       </td>
       
-      <td className="p-4 text-gray-300">
-        ₹{data.currentPrice.toLocaleString('en-IN')}
+      <td className="p-4 text-white font-bold text-sm">
+        {formatPrice(data.currentPrice)}
       </td>
 
-      <td className={`p-4 font-medium ${data.stcg.gain >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-        {data.stcg.gain >= 0 ? '+' : ''}₹{data.stcg.gain.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+      <td className="p-4">
+        <div className="flex flex-col items-start font-medium">
+          <span className={`text-sm ${data.stcg.gain >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+            {formatLarge(data.stcg.gain)}
+          </span>
+          <span className="text-[10px] text-gray-500 font-normal mt-0.5">{data.stcg.balance.toLocaleString()} {data.coin}</span>
+        </div>
       </td>
       
-      <td className={`p-4 font-medium text-right ${data.ltcg.gain >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-        {data.ltcg.gain >= 0 ? '+' : ''}₹{data.ltcg.gain.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+      <td className="p-4">
+        <div className="flex flex-col items-start font-medium">
+          <span className={`text-sm ${data.ltcg.gain >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+             {data.ltcg.gain === 0 ? '$0.00' : formatLarge(data.ltcg.gain)}
+          </span>
+          <span className="text-[10px] text-gray-500 font-normal mt-0.5">{data.ltcg.balance.toLocaleString()} {data.coin}</span>
+        </div>
+      </td>
+
+      <td className="p-4 text-right text-gray-500 font-medium">
+        {isSelected ? (
+          <span className="text-white">
+            {data.totalHolding.toLocaleString()} {data.coin}
+          </span>
+        ) : (
+          "-"
+        )}
       </td>
     </tr>
   );

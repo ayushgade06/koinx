@@ -1,50 +1,47 @@
 import { useHarvest } from "../../context/HarvestContext";
-import { getNet, getTotal } from "../../utils/calculations";
+import { formatCurrency } from "../../utils/formatters";
+import { getNet } from "../../utils/calculations";
 
 export default function PreHarvestCard() {
   const { baseGains } = useHarvest();
 
-  if (!baseGains) {
-    return (
-      <div className="bg-[#111827] border border-gray-800 rounded-2xl p-6 animate-pulse">
-        <div className="h-6 w-32 bg-gray-800 rounded mb-4"></div>
-        <div className="grid grid-cols-2 gap-6">
-          <div className="h-12 bg-gray-800 rounded"></div>
-          <div className="h-12 bg-gray-800 rounded"></div>
-        </div>
-      </div>
-    );
-  }
+  if (!baseGains) return <div className="bg-[#10141E] rounded-xl h-[340px] animate-pulse"></div>;
 
-  const st = getNet(baseGains.stcg.profits, baseGains.stcg.losses);
-  const lt = getNet(baseGains.ltcg.profits, baseGains.ltcg.losses);
-  const total = getTotal(baseGains);
+  const stNet = getNet(baseGains.stcg.profits, baseGains.stcg.losses);
+  const ltNet = getNet(baseGains.ltcg.profits, baseGains.ltcg.losses);
+  const totalNet = stNet + ltNet;
+
+  const Row = ({ label, st, lt, isBold, isTotal }: { label: string; st: number; lt: number; isBold?: boolean; isTotal?: boolean }) => (
+    <div className={`grid grid-cols-[1fr_repeat(2,120px)] py-3 ${isBold ? 'font-bold text-white' : 'text-gray-400'} ${isTotal ? 'mt-6 border-t border-gray-800 pt-6' : ''}`}>
+      <div className="text-left text-sm">{label}</div>
+      <div className="text-right text-sm">{formatCurrency(st)}</div>
+      <div className="text-right text-sm">{formatCurrency(lt)}</div>
+    </div>
+  );
 
   return (
-    <div className="bg-[#111827] border border-gray-800 rounded-2xl p-6 shadow-md">
-      <h2 className="text-lg font-semibold mb-4 text-white">Pre Harvesting</h2>
+    <div className="bg-[#10141E] border border-gray-800 rounded-xl p-10 h-full flex flex-col justify-between">
+      <div>
+        <h2 className="text-2xl font-bold text-white mb-10">Pre Harvesting</h2>
 
-      <div className="grid grid-cols-2 gap-6 text-sm">
-        <div>
-          <p className="text-gray-400 mb-1">Short-term</p>
-          <p className={`${st >= 0 ? 'text-green-400' : 'text-red-400'} font-medium`}>
-            ₹{st.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-          </p>
+        <div className="grid grid-cols-[1fr_repeat(2,120px)] text-sm text-gray-400 mb-6">
+          <div></div>
+          <div className="text-right">Short-term</div>
+          <div className="text-right">Long-term</div>
         </div>
 
-        <div>
-          <p className="text-gray-400 mb-1">Long-term</p>
-          <p className={`${lt >= 0 ? 'text-green-400' : 'text-red-400'} font-medium`}>
-            ₹{lt.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-          </p>
+        <div className="divide-y divide-gray-800/10">
+          <Row label="Profits" st={baseGains.stcg.profits} lt={baseGains.ltcg.profits} />
+          <Row label="Losses" st={baseGains.stcg.losses} lt={baseGains.ltcg.losses} />
+          <Row label="Net Capital Gains" st={stNet} lt={ltNet} isBold isTotal />
         </div>
       </div>
 
-      <div className="mt-6 border-t border-gray-700 pt-4">
-        <p className="text-gray-400 text-sm">Realised Gains</p>
-        <p className="text-2xl font-bold text-white mt-1">
-          ₹{total.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-        </p>
+      <div className="mt-12 flex items-center gap-6">
+        <span className="text-2xl font-bold text-white">Realised Capital Gains:</span>
+        <span className="text-3xl font-black text-white leading-none">
+          {formatCurrency(totalNet)}
+        </span>
       </div>
     </div>
   );
