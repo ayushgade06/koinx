@@ -16,13 +16,16 @@ export default function HoldingRow({ data }: { data: Holding }) {
   };
 
   const formatPrice = (p: number) => {
-    if (p >= 1000) return `$${(p / 1000).toFixed(2)}K`;
+    if (p >= 100000) return `₹${(p / 100000).toFixed(2)}L`;
     return formatCurrency(p);
   };
 
   const formatLarge = (v: number) => {
-    if (Math.abs(v) >= 1000000) return `${v >= 0 ? '+' : '-'}$${(Math.abs(v) / 1000000).toFixed(2)}M`;
-    return `${v >= 0 ? '+' : '-'}${formatCurrency(Math.abs(v))}`;
+    const prefix = v >= 0 ? '+' : '-';
+    const absV = Math.abs(v);
+    if (absV >= 10000000) return `${prefix}₹${(absV / 10000000).toFixed(2)}Cr`;
+    if (absV >= 100000) return `${prefix}₹${(absV / 100000).toFixed(2)}L`;
+    return `${prefix}${formatCurrency(absV)}`;
   };
 
   return (
@@ -72,7 +75,7 @@ export default function HoldingRow({ data }: { data: Holding }) {
       <td className="p-4">
         <div className="flex flex-col items-start font-medium">
           <span className={`text-sm ${data.ltcg.gain >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-             {data.ltcg.gain === 0 ? '$0.00' : formatLarge(data.ltcg.gain)}
+             {data.ltcg.gain === 0 ? '₹0.00' : formatLarge(data.ltcg.gain)}
           </span>
           <span className="text-[10px] text-gray-500 font-normal mt-0.5">{data.ltcg.balance.toLocaleString()} {data.coin}</span>
         </div>

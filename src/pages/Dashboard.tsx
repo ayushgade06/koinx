@@ -12,10 +12,23 @@ export default function Dashboard() {
   const [showHowItWorks, setShowHowItWorks] = useState(false);
   const [isDisclaimerExpanded, setIsDisclaimerExpanded] = useState(false);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    fetchHoldings().then(setHoldings);
-    fetchCapitalGains().then(setBaseGains);
+    Promise.all([
+      fetchHoldings().then(setHoldings),
+      fetchCapitalGains().then(setBaseGains)
+    ]).finally(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0B0F1A] flex flex-col items-center justify-center text-white gap-4">
+        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-gray-400 font-medium animate-pulse">Analysing your portfolio...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0B0F1A] text-white p-8">
@@ -94,12 +107,7 @@ export default function Dashboard() {
         </div>
 
         {/* Table Container */}
-        <div className="bg-[#111827] rounded-xl border border-gray-800 overflow-hidden shadow-lg">
-          <div className="p-6 border-b border-gray-800">
-            <h2 className="text-xl font-bold">Holdings</h2>
-          </div>
-          <HoldingsTable holdings={holdings} />
-        </div>
+        <HoldingsTable holdings={holdings} />
 
       </div>
     </div>

@@ -53,10 +53,27 @@ export default function HoldingsTable({ holdings }: { holdings: Holding[] }) {
     }
   };
 
+  const [showAll, setShowAll] = useState(false);
+  const initialCount = 8;
+  const displayHoldings = showAll ? sortedHoldings : sortedHoldings.slice(0, initialCount);
+
   return (
-    <div className="bg-[#10141E] rounded-xl border border-gray-800 overflow-hidden shadow-lg">
-      <div className="p-6 border-b border-gray-800">
-        <h2 className="text-xl font-bold text-white">Holdings</h2>
+    <div className="bg-[#10141E] rounded-xl border border-gray-800 overflow-hidden shadow-lg mb-8">
+      <div className="p-6 border-b border-gray-800 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <h2 className="text-xl font-bold text-white">Holdings</h2>
+          <span className="bg-gray-800 text-gray-400 text-xs px-2 py-0.5 rounded-full font-medium">
+            {holdings.length} Assets
+          </span>
+        </div>
+        {holdings.length > initialCount && (
+          <button 
+            onClick={() => setShowAll(!showAll)}
+            className="text-blue-500 hover:text-blue-400 text-sm font-bold flex items-center gap-2 transition-colors"
+          >
+            {showAll ? 'Show Less' : 'View All'}
+          </button>
+        )}
       </div>
 
       <div className="overflow-x-auto">
@@ -68,7 +85,7 @@ export default function HoldingsTable({ holdings }: { holdings: Holding[] }) {
                   type="checkbox" 
                   checked={allSelected} 
                   onChange={toggleAll}
-                  className="w-4 h-4 rounded border-gray-700 bg-gray-900 text-blue-500 focus:ring-blue-500"
+                  className="w-4 h-4 rounded border-gray-700 bg-gray-900 text-blue-500 focus:ring-blue-500 transition-all cursor-pointer"
                 />
               </th>
               <th 
@@ -99,8 +116,8 @@ export default function HoldingsTable({ holdings }: { holdings: Holding[] }) {
           </thead>
 
           <tbody className="divide-y divide-gray-800">
-            {sortedHoldings.map((holding) => (
-              <HoldingRow key={holding.coin} data={holding} />
+            {displayHoldings.map((holding) => (
+              <HoldingRow key={`${holding.coinName}-${holding.coin}`} data={holding} />
             ))}
           </tbody>
         </table>
