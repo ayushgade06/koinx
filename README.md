@@ -1,73 +1,77 @@
-# React + TypeScript + Vite
+# KoinX Tax Loss Harvesting Tool
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A professional-grade, high-fidelity React dashboard for optimizing tax liabilities through strategic tax loss harvesting. Designed for the KoinX Frontend Intern Assignment.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
+[Deplolyed Link (Vercel/Netlify)](#)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
+- **Real-time Tax Calculations**: Instantly see how specific holdings impact your short-term and long-term capital gains.
+- **Dynamic Portfolio Optimization**: Select/deselect assets to see optimized "After Harvesting" projections.
+- **Responsive High-Fidelity UI**: Dark-themed dashboard with refined typography, micro-interactions, and premium aesthetics.
+- **Advanced Data Table**:
+  - Real-time selection tracking.
+  - Multi-column sorting (Asset, STCG, LTCG).
+  - "View All" functionality for large portfolios.
+  - Automatic "Amount to Sell" population.
+- **Micro-interactions**: Expandable disclaimers, info modals, and smart loading states.
 
-## React Compiler
+## 🛠️ Tech Stack
+- **Framework**: React 18 with Vite
+- **Language**: TypeScript (Strict Mode)
+- **Styling**: Tailwind CSS
+- **State Management**: Context API (Prop-drill free architecture)
+- **Icons/Assets**: Lucide-inspired components & CoinGecko Oracle images.
+- **Formatting**: Intl API for robust currency and number formatting ($ USD & Indian locale ready).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 💡 Implementation Details & Bonus Points
+- ✅ **Mobile Responsiveness**: Fully fluid layout that adapts from ultra-wide monitors to mobile screens.
+- ✅ **Clean Architecture**: Decoupled business logic (calculations) from UI components for high maintainability.
+- ✅ **Visual Feedback**: Transition effects on row selection, hover states, and loading animations.
+- ✅ **Sorting & Batching**: Implemented logical sorting and "Select All" batching functionality.
+- ✅ **API Mocking**: Robust service layer using Promises to simulate real-world API latencies and error boundaries.
 
-## Expanding the ESLint configuration
+## 📸 Screenshots
+*(Add your screenshots here after deploying)*
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Pre-Harvesting State | Selection Interaction |
+| --- | --- |
+| ![Dashboard Overview](https://via.placeholder.com/800x450?text=KoinX+Dashboard) | ![Harvesting Logic](https://via.placeholder.com/800x450?text=Selection+Interaction) |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ⚙️ Setup Instructions
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Installation
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/ayushgade06/koinx.git
+   cd koinx
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
+## 📝 Assumptions
+- **Price Reliability**: Used CoinGecko as the primary oracle for asset logos and current prices.
+- **Tax Rules**: Followed the provided logic where STCG and LTCG are calculated independently before being summed for "Realised Capital Gains."
+- **Currency**: Matched the visual requirement for USD ($) as per the design prototype, while maintaining logic for local alternatives.
+- **Sorting**: Implemented descending order as default for financial gains to prioritize high-impact assets first.
+
+---
+Developed with by [Ayush Gade](https://github.com/ayushgade06)
+

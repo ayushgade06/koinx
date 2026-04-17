@@ -47,30 +47,18 @@ export default function Dashboard() {
 
         {/* Popup */}
         {showHowItWorks && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div className="bg-white text-gray-800 rounded-2xl w-[400px] p-8 shadow-2xl relative">
-              <button 
-                onClick={() => setShowHowItWorks(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-              >
-                ✕
-              </button>
-              <ul className="space-y-4 text-sm leading-relaxed mb-6">
-                <li className="flex gap-2">
-                  <span className="text-gray-400">•</span>
-                  <span>See your capital gains for FY 2024-25 in the left card</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-gray-400">•</span>
-                  <span>Check boxes for assets you plan on selling to reduce your tax liability</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-gray-400">•</span>
-                  <span>Instantly see your updated tax liability in the right card</span>
-                </li>
+          <div className="absolute top-[70px] left-[220px] z-50 animate-in fade-in zoom-in duration-200 pointer-events-none">
+            <div className="bg-white text-[#111827] rounded-xl w-[280px] p-5 shadow-2xl relative border border-gray-100 pointer-events-auto">
+              {/* Arrow upward tip */}
+              {/* <div className="absolute -top-2 left-6 w-4 h-4 bg-white rotate-45 border-t border-l border-gray-100"></div> */}
+              
+              <ul className="space-y-3 text-[11px] leading-relaxed mb-4 list-disc pl-4 marker:text-gray-400">
+                <li>See your capital gains for FY 2024-25 in the left card</li>
+                <li>Check boxes for assets you plan on selling to reduce your tax liability</li>
+                <li>Instantly see your updated tax liability in the right card</li>
               </ul>
-              <div className="text-xs border-t pt-4 text-gray-600">
-                <span className="font-bold">Pro tip:</span> Experiment with different combinations of your holdings to optimize your tax liability
+              <div className="text-[10px] border-t border-gray-100 pt-3 text-gray-500 leading-normal">
+                <span className="font-bold text-gray-800">Pro tip:</span> Experiment with different combinations of your holdings to optimize your tax liability
               </div>
             </div>
           </div>
