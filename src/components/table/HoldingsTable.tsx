@@ -59,25 +59,9 @@ export default function HoldingsTable({ holdings }: { holdings: Holding[] }) {
 
   return (
     <div className="bg-[#10141E] rounded-xl border border-gray-800 overflow-hidden shadow-lg mb-8">
-      <div className="p-6 border-b border-gray-800 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <h2 className="text-xl font-bold text-white">Holdings</h2>
-          <span className="bg-gray-800 text-gray-400 text-xs px-2 py-0.5 rounded-full font-medium">
-            {holdings.length} Assets
-          </span>
-        </div>
-        {holdings.length > initialCount && (
-          <button 
-            onClick={() => setShowAll(!showAll)}
-            className="text-blue-500 hover:text-blue-400 text-sm font-bold flex items-center gap-2 transition-colors"
-          >
-            {showAll ? 'Show Less' : 'View All'}
-          </button>
-        )}
-      </div>
-
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left border-collapse">
+          {/* ... table content remains unchanged ... */}
           <thead className="text-gray-400 bg-[#161D2B]">
             <tr className="border-b border-gray-800">
               <th className="p-5 w-16 text-center">
@@ -122,6 +106,20 @@ export default function HoldingsTable({ holdings }: { holdings: Holding[] }) {
           </tbody>
         </table>
       </div>
+
+      {holdings.length > initialCount && (
+        <div className="p-4 border-t border-gray-800 flex justify-center bg-[#10141E]">
+          <button 
+            onClick={() => setShowAll(!showAll)}
+            className="flex items-center gap-2 py-2 px-6 rounded-lg bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold uppercase tracking-wider transition-all"
+          >
+            <span>{showAll ? 'Show Less' : `View All ${holdings.length} Assets`}</span>
+            <span className={`transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`}>
+              ▼
+            </span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

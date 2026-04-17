@@ -16,19 +16,19 @@ export default function PostHarvestCard() {
   const savingsValue = baseTotal - totalNet;
 
   const Row = ({ label, st, lt, isBold, isTotal }: { label: string; st: number; lt: number; isBold?: boolean; isTotal?: boolean }) => (
-    <div className={`grid grid-cols-[1fr_repeat(2,120px)] py-3 ${isBold ? 'font-bold text-white' : 'text-blue-100'} ${isTotal ? 'mt-6 border-t border-blue-400/30 pt-6' : ''}`}>
-      <div className="text-left text-sm">{label}</div>
+    <div className={`grid grid-cols-[1fr_repeat(2,120px)] py-4 ${isBold ? 'font-bold text-white' : 'text-blue-100'} ${isTotal ? 'mt-4' : ''}`}>
+      <div className="text-left text-sm font-medium">{label}</div>
       <div className="text-right text-sm">{formatCurrency(st)}</div>
       <div className="text-right text-sm">{formatCurrency(lt)}</div>
     </div>
   );
 
   return (
-    <div className="bg-[#1D69FF] rounded-xl p-10 h-full flex flex-col justify-between text-white shadow-xl">
+    <div className="bg-[#1D69FF] rounded-xl p-8 h-full flex flex-col justify-between text-white shadow-xl">
       <div>
-        <h2 className="text-2xl font-bold mb-10">After Harvesting</h2>
+        <h2 className="text-xl font-bold mb-8">After Harvesting</h2>
 
-        <div className="grid grid-cols-[1fr_repeat(2,120px)] text-sm text-blue-100/70 mb-6">
+        <div className="grid grid-cols-[1fr_repeat(2,120px)] text-sm text-blue-100/70 font-medium mb-4">
           <div></div>
           <div className="text-right">Short-term</div>
           <div className="text-right">Long-term</div>
@@ -42,9 +42,9 @@ export default function PostHarvestCard() {
       </div>
 
       <div>
-        <div className="mt-12 flex items-center gap-6">
-          <span className="text-2xl font-bold text-white leading-tight">Effective Capital Gains:</span>
-          <span className="text-3xl font-black text-white leading-none">
+        <div className="mt-10 flex items-center gap-4">
+          <span className="text-lg font-bold text-white">Effective Capital Gains:</span>
+          <span className="text-2xl font-bold text-white">
             {formatCurrency(totalNet)}
           </span>
         </div>

@@ -80,13 +80,13 @@ export default function Dashboard() {
         <div className="bg-[#112244] border border-blue-900/50 rounded-lg mb-8">
           <button 
             onClick={() => setIsDisclaimerExpanded(!isDisclaimerExpanded)}
-            className="w-full flex items-center justify-between p-4 px-6 hover:bg-blue-900/20 transition-colors"
+            className="w-full flex items-center justify-between p-3 px-6 hover:bg-blue-900/20 transition-colors"
           >
             <div className="flex items-center gap-3">
-              <div className="w-5 h-5 flex items-center justify-center rounded-full border border-blue-400 text-blue-400 text-xs font-bold font-serif">i</div>
-              <span className="text-sm font-medium">Important Notes And Disclaimers</span>
+              <div className="w-5 h-5 flex items-center justify-center rounded-full border border-blue-400 text-blue-400 text-[10px] font-bold">i</div>
+              <span className="text-sm font-medium text-white">Important Notes And Disclaimers</span>
             </div>
-            <span className={`transition-transform duration-300 ${isDisclaimerExpanded ? 'rotate-180' : ''}`}>
+            <span className={`text-[#6B7280] text-xs transition-transform duration-300 ${isDisclaimerExpanded ? 'rotate-180' : ''}`}>
               ▼
             </span>
           </button>
