@@ -8,13 +8,14 @@ A professional-grade, high-fidelity React dashboard for optimizing tax liabiliti
 ## ✨ Features
 - **Real-time Tax Calculations**: Instantly see how specific holdings impact your short-term and long-term capital gains.
 - **Dynamic Portfolio Optimization**: Select/deselect assets to see optimized "After Harvesting" projections.
-- **Responsive High-Fidelity UI**: Dark-themed dashboard with refined typography, micro-interactions, and premium aesthetics.
+- **Dual Theme Support**: Premium Light and Dark mode implementation with a minimalistic aesthetic toggle.
+- **Custom Aesthetic Tooltips**: High-fidelity, perfectly aligned tooltips for price data, providing precision on hover (matches Figma prototype).
 - **Advanced Data Table**:
   - Real-time selection tracking.
   - Multi-column sorting (Asset, STCG, LTCG).
   - "View All" functionality for large portfolios.
   - Automatic "Amount to Sell" population.
-- **Micro-interactions**: Expandable disclaimers, info modals, and smart loading states.
+- **Micro-interactions**: Expandable disclaimers, info modals, sliding theme toggles, and smart loading states.
 
 ## 🛠️ Tech Stack
 - **Framework**: React 18 with Vite
