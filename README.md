@@ -32,13 +32,6 @@ https://koinx-lemon.vercel.app/
 - ✅ **Sorting & Batching**: Implemented logical sorting and "Select All" batching functionality.
 - ✅ **API Mocking**: Robust service layer using Promises to simulate real-world API latencies and error boundaries.
 
-## 📸 Screenshots
-*(Add your screenshots here after deploying)*
-
-| Pre-Harvesting State | Selection Interaction |
-| --- | --- |
-| ![Dashboard Overview](https://via.placeholder.com/800x450?text=KoinX+Dashboard) | ![Harvesting Logic](https://via.placeholder.com/800x450?text=Selection+Interaction) |
-
 ## ⚙️ Setup Instructions
 
 ### Prerequisites
@@ -74,5 +67,5 @@ https://koinx-lemon.vercel.app/
 - **Sorting**: Implemented descending order as default for financial gains to prioritize high-impact assets first.
 
 ---
-Developed with by [Ayush Gade](https://github.com/ayushgade06)
+Developed by [Ayush Gade](https://github.com/ayushgade06)
 
