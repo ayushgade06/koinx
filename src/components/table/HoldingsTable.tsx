@@ -59,9 +59,11 @@ export default function HoldingsTable({ holdings }: { holdings: Holding[] }) {
 
   return (
     <div className="bg-[#10141E] rounded-xl border border-gray-800 overflow-hidden shadow-lg mb-8">
+      <div className="p-6 border-b border-gray-800">
+        <h2 className="text-xl font-bold text-white">Holdings</h2>
+      </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left border-collapse">
-          {/* ... table content remains unchanged ... */}
           <thead className="text-gray-400 bg-[#161D2B]">
             <tr className="border-b border-gray-800">
               <th className="p-5 w-16 text-center">
