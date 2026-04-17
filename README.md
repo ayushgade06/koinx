@@ -3,7 +3,7 @@
 A professional-grade, high-fidelity React dashboard for optimizing tax liabilities through strategic tax loss harvesting. Designed for the KoinX Frontend Intern Assignment.
 
 ## 🚀 Live Demo
-[Deplolyed Link (Vercel/Netlify)](#)
+https://koinx-lemon.vercel.app/
 
 ## ✨ Features
 - **Real-time Tax Calculations**: Instantly see how specific holdings impact your short-term and long-term capital gains.
